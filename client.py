@@ -16,12 +16,17 @@ client.send("www.wikipedia.org".encode('UTF-8'))
 """
 
 import requests
+from urllib3.exceptions import InsecureRequestWarning
+from urllib3 import disable_warnings
+proxy = {"http": "http://localhost:9998",
+         "https": "http://localhost:9999"}
 
-proxy = {"http": "http://localhost:8989", "https": "http://localhost:8989"}
 
-#response = requests.get("http://www.example.com", proxies=proxy)
-response = requests.get("https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal", proxies=proxy)
+response = requests.get("http://www.example.com", proxies=proxy)
 print(response.content)
 
+# disable_warnings(InsecureRequestWarning)
+# response2 = requests.get("https://www.code-animal.com/", proxies=proxy, verify=False)
+# print(response2.content)
 
 #http://localhost:8989/http://www.example.com
